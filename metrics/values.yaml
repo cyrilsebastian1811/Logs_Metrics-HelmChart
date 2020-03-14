@@ -5,30 +5,65 @@ prometheus:
       evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
     prometheus.yml: 
       scrape_configs:
-        - job_name: 'spring_micrometer'
-          metrics_path: '/actuator/prometheus'
+        - job_name: 'backend-read'
+          metrics_path: '/metrics'
           scrape_interval: 5s
           static_configs:
             - targets:
-              - webapp-backend-service.api.svc.cluster.local:8080
+              - lb-backend.api.svc.cluster.local:3000
         - job_name: 'elasticsearch-exporter'
           metrics_path: '/metrics'
           scrape_interval: 5s
           static_configs:
             - targets:
-              - v1-elasticsearch-exporter.logging.svc.cluster.local:9108
+              - ops-metrics-elasticsearch-exporter.logging.svc.cluster.local:9108
         - job_name: 'prometheus-redis-exporter'
           metrics_path: '/metrics'
           scrape_interval: 5s
           static_configs:
             - targets:
-              - v1-prometheus-redis-exporter.logging.svc.cluster.local:9121
+              - ops-metrics-prometheus-redis-exporter.logging.svc.cluster.local:9121
 
 elasticsearch-exporter:
   es:
-    uri: http://v1-elasticsearch-coordinating-only.logging.svc.cluster.local:9200
+    uri: http://ops-metrics-elasticsearch-coordinating-only.logging.svc.cluster.local:9200
 
 prometheus-redis-exporter:
-  redisAdress: redis://v10-redis.api.svc.cluster.local:6379
+  redisAdress: redis://backend-redis.api.svc.cluster.local:6379
   auth:
-    redisPassword: welcome12
+    redisPassword: Yhbvft123@
+
+# prometheus:
+#   serverFiles:
+#     global:
+#       scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+#       evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+#     prometheus.yml: 
+#       scrape_configs:
+#         - job_name: 'spring_micrometer'
+#           metrics_path: '/actuator/prometheus'
+#           scrape_interval: 5s
+#           static_configs:
+#             - targets:
+#               - webapp-backend-service.api.svc.cluster.local:8080
+#         - job_name: 'elasticsearch-exporter'
+#           metrics_path: '/metrics'
+#           scrape_interval: 5s
+#           static_configs:
+#             - targets:
+#               - v1-elasticsearch-exporter.logging.svc.cluster.local:9108
+#         - job_name: 'prometheus-redis-exporter'
+#           metrics_path: '/metrics'
+#           scrape_interval: 5s
+#           static_configs:
+#             - targets:
+#               - v1-prometheus-redis-exporter.logging.svc.cluster.local:9121
+
+# elasticsearch-exporter:
+#   es:
+#     uri: http://v1-elasticsearch-coordinating-only.logging.svc.cluster.local:9200
+
+# prometheus-redis-exporter:
+#   redisAdress: redis://v10-redis.api.svc.cluster.local:6379
+#   auth:
+#     redisPassword: welcome12
