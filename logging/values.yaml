@@ -1,0 +1,30 @@
+kibana:
+  elasticsearch:
+      hosts:
+      - ops-logging-elasticsearch-coordinating-only.logging.svc.cluster.local
+      port: 9200
+      enabled: false
+      
+  metrics:
+      enabled: true
+     
+  service:
+      type: LoadBalancer
+
+
+fluentd:
+  aggregator:
+      configMap: elasticsearch-output
+      extraEnv:
+      - name: ELASTICSEARCH_HOST
+        value: ops-logging-elasticsearch-coordinating-only.logging.svc.cluster.local
+      - name: ELASTICSEARCH_PORT
+        value: "9200"
+    
+  forwarder:
+      configMap: apache-log-parser
+      extraEnv:
+      - name: FLUENTD_DAEMON_USER
+        value: root
+      - name: FLUENTD_DAEMON_GROUP
+        value: root
