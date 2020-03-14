@@ -23,6 +23,12 @@ dependencies:
   - name: prometheus
     version: 11.0.2
     repository: https://kubernetes-charts.storage.googleapis.com
+  - name: elasticsearch-exporter
+    version: 3.0.0
+    repository: https://kubernetes-charts.storage.googleapis.com
+  - name: prometheus-redis-exporter
+    version: 3.3.3
+    repository: https://kubernetes-charts.storage.googleapis.com
 
 
     
