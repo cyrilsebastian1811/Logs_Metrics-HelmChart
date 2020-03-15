@@ -75,9 +75,4 @@ kubectl delete ClusterRoleBinding ops-metrics-kube-state-metrics
 kubectl delete ClusterRoleBinding ops-metrics-prometheus-alertmanager
 kubectl delete ClusterRoleBinding ops-metrics-prometheus-pushgateway
 kubectl delete ClusterRoleBinding ops-metrics-prometheus-server
-<<<<<<< HEAD
 ```
-
-=======
-```
->>>>>>> 9206a3c5fb3b75e1416ff2515211f2f3a8e35039
